@@ -309,10 +309,7 @@ def zen_consensus(
         execution_id,
         model,
     )
-    success_flags: List[bool] = []
-    for response in responses:
-        success_flags.append(response.succeeded)
-    degraded = not all(success_flags)
+    degraded = not all(response.succeeded for response in responses)
     warnings: List[str] = []
     if degraded:
         warnings.append(DEGRADED_WARNING)
