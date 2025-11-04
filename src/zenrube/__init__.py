@@ -316,9 +316,7 @@ def zen_consensus(
     if consensus_text is None:
         warnings.append("Consensus synthesis unavailable.")
 
-    experts_consulted: List[str] = []
-    for response in responses:
-        experts_consulted.append(response.name)
+    experts_consulted: List[str] = [response.name for response in responses]
     metadata = {
         "parallel_execution": synthesis_config.parallel_execution,
     }
