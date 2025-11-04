@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zenrube-mcp"
+version = "0.1.0"
+description = "Zen-Inspired Consensus for Rube Workflows - Multi-model AI orchestration"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "vmanoilov", email = "vmanoilov@users.noreply.github.com"}
+]
+keywords = ["ai", "consensus", "mcp", "multi-model", "rube", "automation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    # No external dependencies - uses Rube's invoke_llm helper
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "mypy>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/vmanoilov/zenrube-mcp"
+Repository = "https://github.com/vmanoilov/zenrube-mcp"
+Issues = "https://github.com/vmanoilov/zenrube-mcp/issues"
+
+[project.scripts]
+zenrube = "zenrube:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
