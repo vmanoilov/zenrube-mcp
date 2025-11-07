@@ -1,0 +1,174 @@
+[2025-11-07T12:55:45.345250] Starting version update detection
+[2025-11-07T12:55:57.085938] Test activity message
+[2025-11-07T12:59:40.238597] Starting version update detection
+[2025-11-07T12:59:40.238931] Detected updates for 1 experts: ['test_expert1']
+[2025-11-07T12:59:40.245541] Starting automated publishing workflow
+[2025-11-07T12:59:40.245766] Step 1: Checking for version updates
+[2025-11-07T12:59:40.245830] Starting version update detection
+[2025-11-07T12:59:40.245977] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:40.246080] Found updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:40.246116] Step 2: Generating expert manifest
+[2025-11-07T12:59:40.246178] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:40.246248] Step 4: Verifying publication
+[2025-11-07T12:59:40.246324] Step 5: Recording changelog entries
+[2025-11-07T12:59:40.246502] Recorded changelog for test_expert v1.1.0
+[2025-11-07T12:59:40.246589] Publication completed successfully - ID: test123, Experts: 0
+[2025-11-07T12:59:40.249223] Starting automated publishing workflow
+[2025-11-07T12:59:40.249385] Step 1: Checking for version updates
+[2025-11-07T12:59:40.249425] Starting version update detection
+[2025-11-07T12:59:40.249511] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:40.249544] Found updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:40.249567] Step 2: Generating expert manifest
+[2025-11-07T12:59:40.249623] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:40.249683] Step 4: Verifying publication
+[2025-11-07T12:59:40.249730] Step 5: Recording changelog entries
+[2025-11-07T12:59:40.249870] Recorded changelog for test_expert v1.1.0
+[2025-11-07T12:59:40.249963] Publication completed successfully - ID: manifest_12345, Experts: 1
+[2025-11-07T12:59:40.252538] Starting automated publishing workflow
+[2025-11-07T12:59:40.252675] Step 1: Checking for version updates
+[2025-11-07T12:59:40.252730] Starting version update detection
+[2025-11-07T12:59:40.252869] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:40.252987] Found updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:40.253164] Step 2: Generating expert manifest
+[2025-11-07T12:59:40.253245] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:40.253337] Step 4: Verifying publication
+[2025-11-07T12:59:40.253672] ERROR: Auto-publish workflow failed: Publication verification failed: Authentication failed
+[2025-11-07T12:59:40.268798] Starting automated publishing workflow
+[2025-11-07T12:59:40.269005] Step 1: Checking for version updates
+[2025-11-07T12:59:40.269066] Starting version update detection
+[2025-11-07T12:59:40.269212] Detected updates for 2 experts: ['test_expert1', 'test_expert2']
+[2025-11-07T12:59:40.269312] Found updates for 2 experts: ['test_expert1', 'test_expert2']
+[2025-11-07T12:59:40.269359] Step 2: Generating expert manifest
+[2025-11-07T12:59:40.269448] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:40.269594] Step 4: Verifying publication
+[2025-11-07T12:59:40.269732] Step 5: Recording changelog entries
+[2025-11-07T12:59:40.269944] Recorded changelog for test_expert1 v1.1.0
+[2025-11-07T12:59:40.270070] Recorded changelog for test_expert2 v1.2.0
+[2025-11-07T12:59:40.270127] Publication completed successfully - ID: test123, Experts: 0
+[2025-11-07T12:59:40.283031] Starting version update detection
+[2025-11-07T12:59:40.283408] No version updates detected
+[2025-11-07T12:59:40.287241] Starting automated publishing workflow
+[2025-11-07T12:59:40.287478] Step 1: Checking for version updates
+[2025-11-07T12:59:40.287542] Starting version update detection
+[2025-11-07T12:59:40.287687] No version updates detected
+[2025-11-07T12:59:40.287780] No updates found - skipping publication
+[2025-11-07T12:59:54.144679] Starting version update detection
+[2025-11-07T12:59:54.145246] Detected updates for 1 experts: ['test_expert1']
+[2025-11-07T12:59:54.150220] Starting automated publishing workflow
+[2025-11-07T12:59:54.150499] Step 1: Checking for version updates
+[2025-11-07T12:59:54.150569] Starting version update detection
+[2025-11-07T12:59:54.150948] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:54.151078] Found updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:54.151138] Step 2: Generating expert manifest
+[2025-11-07T12:59:54.151236] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:54.151322] Step 4: Verifying publication
+[2025-11-07T12:59:54.151469] Step 5: Recording changelog entries
+[2025-11-07T12:59:54.151840] Recorded changelog for test_expert v1.1.0
+[2025-11-07T12:59:54.152006] Publication completed successfully - ID: test123, Experts: 0
+[2025-11-07T12:59:54.159421] Starting automated publishing workflow
+[2025-11-07T12:59:54.162884] Step 1: Checking for version updates
+[2025-11-07T12:59:54.165112] Starting version update detection
+[2025-11-07T12:59:54.166264] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:54.166444] Found updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:54.166500] Step 2: Generating expert manifest
+[2025-11-07T12:59:54.166609] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:54.166700] Step 4: Verifying publication
+[2025-11-07T12:59:54.166775] Step 5: Recording changelog entries
+[2025-11-07T12:59:54.167038] Recorded changelog for test_expert v1.1.0
+[2025-11-07T12:59:54.167190] Publication completed successfully - ID: manifest_12345, Experts: 1
+[2025-11-07T12:59:54.172140] Starting automated publishing workflow
+[2025-11-07T12:59:54.172382] Step 1: Checking for version updates
+[2025-11-07T12:59:54.172450] Starting version update detection
+[2025-11-07T12:59:54.172609] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:54.172718] Found updates for 1 experts: ['test_expert']
+[2025-11-07T12:59:54.172771] Step 2: Generating expert manifest
+[2025-11-07T12:59:54.172870] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:54.173257] Step 4: Verifying publication
+[2025-11-07T12:59:54.175388] ERROR: Auto-publish workflow failed: Publication verification failed: Authentication failed
+[2025-11-07T12:59:54.194190] Starting automated publishing workflow
+[2025-11-07T12:59:54.194443] Step 1: Checking for version updates
+[2025-11-07T12:59:54.194509] Starting version update detection
+[2025-11-07T12:59:54.194652] Detected updates for 2 experts: ['test_expert1', 'test_expert2']
+[2025-11-07T12:59:54.194708] Found updates for 2 experts: ['test_expert1', 'test_expert2']
+[2025-11-07T12:59:54.194742] Step 2: Generating expert manifest
+[2025-11-07T12:59:54.194824] Step 3: Publishing manifest to Rube.app
+[2025-11-07T12:59:54.195068] Step 4: Verifying publication
+[2025-11-07T12:59:54.195417] Step 5: Recording changelog entries
+[2025-11-07T12:59:54.195659] Recorded changelog for test_expert1 v1.1.0
+[2025-11-07T12:59:54.195820] Recorded changelog for test_expert2 v1.2.0
+[2025-11-07T12:59:54.195883] Publication completed successfully - ID: test123, Experts: 0
+[2025-11-07T12:59:54.206582] Starting version update detection
+[2025-11-07T12:59:54.207567] No version updates detected
+[2025-11-07T12:59:54.211394] Starting automated publishing workflow
+[2025-11-07T12:59:54.211626] Step 1: Checking for version updates
+[2025-11-07T12:59:54.211690] Starting version update detection
+[2025-11-07T12:59:54.211831] No version updates detected
+[2025-11-07T12:59:54.211874] No updates found - skipping publication
+[2025-11-07T13:35:02.413996] Starting automated publishing workflow
+[2025-11-07T13:35:02.415088] Step 1: Checking for version updates
+[2025-11-07T13:35:02.415176] Starting version update detection
+[2025-11-07T13:35:02.415288] No updates found - skipping publication
+[2025-11-07T13:46:15.343470] Starting version update detection
+[2025-11-07T13:46:15.343715] Detected updates for 1 experts: ['test_expert1']
+[2025-11-07T13:46:15.347450] Starting automated publishing workflow
+[2025-11-07T13:46:15.347584] Step 1: Checking for version updates
+[2025-11-07T13:46:15.347623] Starting version update detection
+[2025-11-07T13:46:15.347702] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T13:46:15.347732] Found updates for 1 experts: ['test_expert']
+[2025-11-07T13:46:15.347755] Step 2: Generating expert manifest
+[2025-11-07T13:46:15.347819] Step 3: Publishing manifest to Rube.app
+[2025-11-07T13:46:15.347870] Step 4: Verifying publication
+[2025-11-07T13:46:15.347912] Step 5: Recording changelog entries
+[2025-11-07T13:46:15.348053] Recorded changelog for test_expert v1.1.0
+[2025-11-07T13:46:15.348145] Publication completed successfully - ID: test123, Experts: 0
+[2025-11-07T13:46:15.351230] Starting automated publishing workflow
+[2025-11-07T13:46:15.351391] Step 1: Checking for version updates
+[2025-11-07T13:46:15.351438] Starting version update detection
+[2025-11-07T13:46:15.351554] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T13:46:15.351594] Found updates for 1 experts: ['test_expert']
+[2025-11-07T13:46:15.351615] Step 2: Generating expert manifest
+[2025-11-07T13:46:15.351661] Step 3: Publishing manifest to Rube.app
+[2025-11-07T13:46:15.351705] Step 4: Verifying publication
+[2025-11-07T13:46:15.351750] Step 5: Recording changelog entries
+[2025-11-07T13:46:15.351883] Recorded changelog for test_expert v1.1.0
+[2025-11-07T13:46:15.351991] Publication completed successfully - ID: manifest_12345, Experts: 1
+[2025-11-07T13:46:15.354334] Starting automated publishing workflow
+[2025-11-07T13:46:15.354444] Step 1: Checking for version updates
+[2025-11-07T13:46:15.354487] Starting version update detection
+[2025-11-07T13:46:15.354568] Detected updates for 1 experts: ['test_expert']
+[2025-11-07T13:46:15.354639] Found updates for 1 experts: ['test_expert']
+[2025-11-07T13:46:15.354672] Step 2: Generating expert manifest
+[2025-11-07T13:46:15.354750] Step 3: Publishing manifest to Rube.app
+[2025-11-07T13:46:15.354865] Step 4: Verifying publication
+[2025-11-07T13:46:15.355125] ERROR: Auto-publish workflow failed: Publication verification failed: Authentication failed
+[2025-11-07T13:46:15.362472] Starting automated publishing workflow
+[2025-11-07T13:46:15.362618] Step 1: Checking for version updates
+[2025-11-07T13:46:15.362669] Starting version update detection
+[2025-11-07T13:46:15.362801] Detected updates for 2 experts: ['test_expert1', 'test_expert2']
+[2025-11-07T13:46:15.362913] Found updates for 2 experts: ['test_expert1', 'test_expert2']
+[2025-11-07T13:46:15.363028] Step 2: Generating expert manifest
+[2025-11-07T13:46:15.363299] Step 3: Publishing manifest to Rube.app
+[2025-11-07T13:46:15.363442] Step 4: Verifying publication
+[2025-11-07T13:46:15.363573] Step 5: Recording changelog entries
+[2025-11-07T13:46:15.363841] Recorded changelog for test_expert1 v1.1.0
+[2025-11-07T13:46:15.363970] Recorded changelog for test_expert2 v1.2.0
+[2025-11-07T13:46:15.364061] Publication completed successfully - ID: test123, Experts: 0
+[2025-11-07T13:46:15.366789] Starting version update detection
+[2025-11-07T13:46:15.367125] No version updates detected
+[2025-11-07T13:46:15.370313] Starting automated publishing workflow
+[2025-11-07T13:46:15.370476] Step 1: Checking for version updates
+[2025-11-07T13:46:15.370527] Starting version update detection
+[2025-11-07T13:46:15.370643] No version updates detected
+[2025-11-07T13:46:15.370728] No updates found - skipping publication
+[2025-11-07T13:58:45.338741] Starting automated publishing workflow
+[2025-11-07T13:58:45.338972] Step 1: Checking for version updates
+[2025-11-07T13:58:45.339041] Starting version update detection
+[2025-11-07T13:58:45.339197] No updates found - skipping publication
+[2025-11-07T14:01:43.436136] Starting automated publishing workflow
+[2025-11-07T14:01:43.436344] Step 1: Checking for version updates
+[2025-11-07T14:01:43.436412] Starting version update detection
+[2025-11-07T14:01:43.436505] No updates found - skipping publication
+[2025-11-07T14:02:46.186471] Starting automated publishing workflow
+[2025-11-07T14:02:46.186799] Step 1: Checking for version updates
+[2025-11-07T14:02:46.186956] Starting version update detection
+[2025-11-07T14:02:46.187247] No updates found - skipping publication

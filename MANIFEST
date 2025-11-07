@@ -1,0 +1,9 @@
+include README.md
+include zenrube_changelog.json
+include zenrube_activity.log
+include CHANGELOG.md
+include LICENSE
+include CONTRIBUTING.md
+recursive-include examples *.md
+recursive-include src/zenrube *.py
+recursive-include tests *.py
