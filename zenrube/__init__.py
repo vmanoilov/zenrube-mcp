@@ -12,16 +12,16 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-from .cache import CacheManager, build_cache_key
-from .config import build_synthesis_config, load_config
-from .experts_module import ExpertDefinition, get_expert, list_experts
-from .models import (
+from zenrube.cache import CacheManager, build_cache_key
+from zenrube.config import build_synthesis_config, load_config
+from zenrube.experts_module import ExpertDefinition, get_expert, list_experts
+from zenrube.models import (
     ConsensusResult,
     ExpertResponse,
     SynthesisConfig,
     SYNTHESIS_STYLES,
 )
-from .providers import ProviderRegistry, RubeProvider
+from zenrube.providers import ProviderRegistry, RubeProvider
 
 DEGRADED_WARNING = "One or more experts failed; consensus may be degraded."
 

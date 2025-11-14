@@ -21,7 +21,7 @@ def test_expert_registry():
     
     try:
         # Import ExpertRegistry
-        from src.zenrube.experts.expert_registry import ExpertRegistry
+        from zenrube.experts.expert_registry import ExpertRegistry
         print("✅ Successfully imported ExpertRegistry")
         
         # Initialize registry
@@ -82,7 +82,7 @@ def test_expert_registry():
             import importlib
             
             # Test with data_cleaner module
-            data_cleaner_module = importlib.import_module("src.zenrube.experts.data_cleaner")
+            data_cleaner_module = importlib.import_module("zenrube.experts.data_cleaner")
             is_valid = registry.validate_metadata(data_cleaner_module)
             
             if is_valid:

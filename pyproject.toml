@@ -27,7 +27,7 @@ Homepage = "https://github.com/vmanoilov/zenrube-mcp"
 Repository = "https://github.com/vmanoilov/zenrube-mcp"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = {"" = "."}
 packages = ["zenrube", "zenrube.experts"]
 include-package-data = true
 

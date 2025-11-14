@@ -1,28 +1,35 @@
 # server.py
-from mcp import Server
+from mcp.server import FastMCP
 from pydantic import BaseModel
 import importlib
 
 # Initialize MCP server
-server = Server(name="zenrube")
+server = FastMCP(name="zenrube")
 
 # Load actual ZenRube modules
-semantic_router = importlib.import_module("src.zenrube.experts.semantic_router")
-expert_registry = importlib.import_module("src.zenrube.experts.expert_registry")
+from zenrube.experts.semantic_router import SemanticRouterExpert
+from zenrube.experts_module import get_expert
+from zenrube.experts.expert_registry import ExpertRegistry
+
+# Initialize experts
+semantic_router = SemanticRouterExpert()
+expert_registry = ExpertRegistry()
 
 @server.tool()
 def route(prompt: str) -> list[str]:
     """Return the expert sequence from the real ZenRube semantic router."""
-    result = semantic_router.route_prompt(prompt)
-    return result if isinstance(result, list) else [result]
+    result = semantic_router.run(prompt)
+    # Extract route from the result
+    return [result.get("route", "general_handler")]
 
 @server.tool()
 def run(expert: str, prompt: str) -> str:
     """Execute a single ZenRube expert."""
-    expert_obj = expert_registry.get_expert(expert)
-    if expert_obj is None:
+    try:
+        expert_definition = get_expert(expert)
+        return expert_definition.build_prompt(prompt)
+    except KeyError:
         return f"Error: Expert '{expert}' not found."
-    return expert_obj.run(prompt)
 
 # export app for FastMCP
-app = server.app
+app = server.streamable_http_app

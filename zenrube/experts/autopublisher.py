@@ -15,9 +15,9 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime
 
 # Import required expert modules
-from .version_manager import VersionManagerExpert
-from .publisher import PublisherExpert
-from .rube_adapter import RubeAdapterExpert
+from zenrube.experts.version_manager import VersionManagerExpert
+from zenrube.experts.publisher import PublisherExpert
+from zenrube.experts.rube_adapter import RubeAdapterExpert
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

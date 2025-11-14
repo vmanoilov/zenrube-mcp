@@ -12,7 +12,7 @@ import os
 import json
 import logging
 from typing import Dict, Any, Optional
-from .expert_registry import ExpertRegistry
+from zenrube.experts.expert_registry import ExpertRegistry
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

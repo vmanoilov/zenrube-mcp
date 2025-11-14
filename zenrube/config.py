@@ -9,7 +9,7 @@ from typing import Any, Dict, Iterable, Mapping, MutableMapping, Optional
 
 import yaml  # type: ignore[import-untyped]
 
-from .models import SynthesisConfig
+from zenrube.models import SynthesisConfig
 
 LOGGER = logging.getLogger("zenrube.config")
 
@@ -71,7 +71,7 @@ def load_config(path: Optional[os.PathLike[str]] = None) -> Dict[str, Any]:
 
 
 def _register_configured_experts(config: Mapping[str, Any]) -> None:
-    from .experts import ExpertDefinition, register_custom_expert
+    from zenrube.experts import ExpertDefinition, register_custom_expert
     
     custom_experts = config.get("custom_experts", {})
     if not isinstance(custom_experts, Mapping):
