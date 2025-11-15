@@ -1,6 +1,17 @@
 import re
-import math
-from typing import List, Dict
+import logging
+import math 
+from typing import Dict
+
+EXPERT_METADATA = {
+    "name": "semantic_router",
+    "version": "1.0",
+    "description": "Analyzes text to infer intent and route data to the correct Zenrube expert or flow.",
+    "author": "vladinc@gmail.com"
+}
+
+
+
 
 # Experts available
 EXPERTS = {
