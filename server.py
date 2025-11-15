@@ -43,4 +43,4 @@ def list_experts() -> list[str]:
         return [f"list_error: {str(e)}"]
 
 # FastMCP export
-app = mcp.app
+app = mcp
