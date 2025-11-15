@@ -23,8 +23,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/vmanoilov/zenrube-mcp"
-Repository = "https://github.com/vmanoilov/zenrube-mcp"
+Homepage = "https://github.com/vmanoilov/zenrube"
+Repository = "https://github.com/vmanoilov/zenrube"
 
 [tool.setuptools]
 package-dir = {"" = "."}
