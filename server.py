@@ -1,15 +1,15 @@
 # server.py
-from mcp import Server
+from fastmcp import FastMCP
 from zenrube.experts.semantic_router import SemanticRouterExpert
 from zenrube.experts_module import get_expert
 from zenrube.experts.expert_registry import ExpertRegistry
 
-server = Server(name="zenrube")
+mcp = FastMCP("ZenRube")
 
 semantic_router = SemanticRouterExpert()
 expert_registry = ExpertRegistry()
 
-@server.tool()
+@mcp.tool
 def route(prompt: str) -> list[str]:
     try:
         result = semantic_router.run(prompt)
@@ -20,7 +20,7 @@ def route(prompt: str) -> list[str]:
     except Exception as e:
         return [f"router_error: {str(e)}"]
 
-@server.tool()
+@mcp.tool
 def run(expert: str, prompt: str) -> str:
     try:
         expert_instance = expert_registry.load_expert(expert)
@@ -32,7 +32,7 @@ def run(expert: str, prompt: str) -> str:
         except Exception as e:
             return f"expert_error: {str(e)}"
 
-@server.tool()
+@mcp.tool
 def list_experts() -> list[str]:
     try:
         registry_list = list(expert_registry.list_available_experts())
@@ -42,5 +42,5 @@ def list_experts() -> list[str]:
     except Exception as e:
         return [f"list_error: {str(e)}"]
 
-# 🔥 Correct MCP export
-app = server.app
+# FastMCP export
+app = mcp.app
