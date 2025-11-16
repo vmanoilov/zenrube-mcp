@@ -1,4 +1,5 @@
 # server.py
+import os
 from fastmcp import FastMCP
 from zenrube.experts.semantic_router import SemanticRouterExpert
 from zenrube.experts_module import get_expert
@@ -8,6 +9,115 @@ mcp = FastMCP("ZenRube")
 
 semantic_router = SemanticRouterExpert()
 expert_registry = ExpertRegistry()
+
+# ---------------------------------------------------------------------
+# Filesystem MCP Tools
+# ---------------------------------------------------------------------
+
+@mcp.tool
+def list_directory(path: str) -> dict:
+    """List directory contents with metadata."""
+    try:
+        if not os.path.exists(path):
+            return {"error": f"Path does not exist: {path}"}
+        if not os.path.isdir(path):
+            return {"error": f"Path is not a directory: {path}"}
+            
+        items = []
+        for item in os.listdir(path):
+            full_path = os.path.join(path, item)
+            stat = os.stat(full_path)
+            items.append({
+                "name": item,
+                "path": full_path,
+                "is_dir": os.path.isdir(full_path),
+                "size": stat.st_size,
+                "mtime": stat.st_mtime
+            })
+        
+        return {"ok": True, "path": path, "items": items}
+    except Exception as e:
+        return {"error": f"Failed to list directory: {str(e)}"}
+
+@mcp.tool
+def read_text_file(path: str, head: int = None, tail: int = None) -> dict:
+    """Read text file content with optional line limiting."""
+    try:
+        if not os.path.exists(path):
+            return {"error": f"File does not exist: {path}"}
+        if not os.path.isfile(path):
+            return {"error": f"Path is not a file: {path}"}
+            
+        with open(path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            
+        content_lines = lines
+        if head is not None:
+            content_lines = content_lines[:head]
+        if tail is not None:
+            content_lines = content_lines[-tail:]
+            
+        content = ''.join(content_lines)
+        return {
+            "ok": True,
+            "path": path,
+            "content": content,
+            "lines_total": len(lines),
+            "lines_returned": len(content_lines)
+        }
+    except Exception as e:
+        return {"error": f"Failed to read file: {str(e)}"}
+
+@mcp.tool
+def write_text_file(path: str, content: str, create: bool = True, overwrite: bool = False) -> dict:
+    """Write text file with create and overwrite options."""
+    try:
+        if not overwrite and os.path.exists(path):
+            return {"error": f"File already exists: {path}"}
+            
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(content)
+            
+        return {"ok": True, "path": path, "bytes_written": len(content)}
+    except Exception as e:
+        return {"error": f"Failed to write file: {str(e)}"}
+
+@mcp.tool
+def delete_path(path: str) -> dict:
+    """Delete file or directory (recursive)."""
+    try:
+        if not os.path.exists(path):
+            return {"error": f"Path does not exist: {path}"}
+            
+        if os.path.isdir(path):
+            import shutil
+            shutil.rmtree(path)
+            return {"ok": True, "path": path, "action": "directory_deleted"}
+        else:
+            os.remove(path)
+            return {"ok": True, "path": path, "action": "file_deleted"}
+    except Exception as e:
+        return {"error": f"Failed to delete path: {str(e)}"}
+
+@mcp.tool
+def move_path(src: str, dest: str) -> dict:
+    """Move/rename file or directory."""
+    try:
+        if not os.path.exists(src):
+            return {"error": f"Source path does not exist: {src}"}
+        if os.path.exists(dest):
+            return {"error": f"Destination path already exists: {dest}"}
+            
+        # Ensure destination directory exists
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        
+        os.rename(src, dest)
+        return {"ok": True, "src": src, "dest": dest, "action": "moved"}
+    except Exception as e:
+        return {"error": f"Failed to move path: {str(e)}"}
 
 @mcp.tool
 def route(prompt: str) -> list[str]:

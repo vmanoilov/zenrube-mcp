@@ -1,0 +1,177 @@
+# zenrube/agent_runtime/fs_loop.py
+
+from __future__ import annotations
+
+from typing import Any, Dict, List, Optional
+
+from zenrube.experts.chatgpt_fs_agent import (
+    ChatGPTFsAgent,
+    MCPFilesystemClient,
+)
+from zenrube.agent_runtime.fs_relay import execute_fs_plan_locally  # if you created it, else inline
+
+
+# --------- LLM bridge placeholder ------------------------------------
+# You must implement this to call Kilo / OpenAI / Claude, etc.
+
+def call_fs_planner_llm(
+    system_prompt: str,
+    messages: List[Dict[str, str]],
+) -> Dict[str, Any]:
+    """
+    Call your planner LLM and return parsed JSON.
+
+    messages is a list of {"role": "system"|"user"|"assistant", "content": "..."}.
+
+    This function MUST:
+    - send system_prompt + messages to your LLM
+    - get the raw string response
+    - parse it as JSON
+    - return the parsed dict: {"tasks": [...], "meta": {...}}
+
+    Right now it's a stub so you can wire in your preferred client.
+    """
+    raise NotImplementedError("Implement LLM call here")
+
+
+FS_PLANNER_SYSTEM_PROMPT = """
+You are an autonomous Filesystem Planner for the ZenRube project.
+
+You plan and execute multi-step filesystem operations via a filesystem agent.
+You NEVER execute filesystem operations yourself.
+You ONLY output JSON plans using the format below.
+
+Your STRICT output format each turn:
+
+{
+  "tasks": [
+    {
+      "op": "list" | "read" | "write" | "delete" | "move",
+      "path": "<relative path inside /workspaces/ZenRube>",
+      "content": "<string, for write only>",
+      "dest_path": "<string, for move only>",
+      "head": <int, optional>,
+      "tail": <int, optional>
+    }
+  ],
+  "meta": {
+    "reason": "<short explanation>",
+    "done": <true|false>
+  }
+}
+
+Rules:
+- Always respond with VALID JSON only. No markdown, no prose.
+- Use the minimum number of tasks per step.
+- All paths must remain under /workspaces/ZenRube.
+- When you believe the overall goal is completed, set meta.done = true and return an empty tasks list.
+- May examine files first (read) and then perform edits (write) in later turns.
+- Prefer small, incremental edits over huge destructive changes.
+""".strip()
+
+
+class FsAgentLoop:
+    """
+    Fully automated FS-Agent loop.
+
+    Flow:
+      1. Planner LLM produces a JSON plan (tasks + meta).
+      2. ChatGPTFsAgent executes the tasks via MCPFilesystemClient.
+      3. Results are fed back to the planner.
+      4. Repeat until meta.done == True or max_steps reached.
+    """
+
+    def __init__(
+        self,
+        max_steps: int = 10,
+    ) -> None:
+        self.max_steps = max_steps
+
+    def _execute_tasks(self, plan: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Execute a JSON plan using the existing FS agent.
+        """
+        # Use your existing relay, or inline the agent here.
+        return execute_fs_plan_locally(plan)
+
+    def run(
+        self,
+        goal: str,
+        initial_context: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Run the autonomous loop for a given high-level goal.
+
+        Returns a dict with the final planner state and all intermediate steps.
+        """
+        history: List[Dict[str, str]] = []
+        steps: List[Dict[str, Any]] = []
+
+        # seed the conversation
+        user_content = goal
+        if initial_context:
+            user_content += f"\n\nExtra context:\n{initial_context}"
+
+        history.append({"role": "user", "content": user_content})
+
+        for step in range(self.max_steps):
+            # 1. Ask planner for a plan
+            planner_response = call_fs_planner_llm(
+                system_prompt=FS_PLANNER_SYSTEM_PROMPT,
+                messages=history,
+            )
+
+            # Expecting planner_response = {"tasks": [...], "meta": {...}}
+            tasks = planner_response.get("tasks", [])
+            meta = planner_response.get("meta", {}) or {}
+            done = bool(meta.get("done", False))
+
+            step_record: Dict[str, Any] = {
+                "step": step,
+                "plan": planner_response,
+                "execution_result": None,
+            }
+
+            if not tasks:
+                # no tasks to execute
+                steps.append(step_record)
+                if done:
+                    break
+                # If no tasks and not done, ask planner again with that info
+                history.append(
+                    {
+                        "role": "assistant",
+                        "content": "Planner returned no tasks. Please refine.",
+                    }
+                )
+                continue
+
+            # 2. Execute the tasks through FS agent
+            exec_plan = {"tasks": tasks, "meta": meta}
+            exec_result = self._execute_tasks(exec_plan)
+            step_record["execution_result"] = exec_result
+            steps.append(step_record)
+
+            # 3. Feed results back to planner
+            history.append(
+                {
+                    "role": "assistant",
+                    "content": (
+                        "Execution result:\n"
+                        + str(exec_result)
+                    ),
+                }
+            )
+
+            if done:
+                break
+
+        return {
+            "goal": goal,
+            "steps": steps,
+            "stopped_reason": (
+                "done_flag"
+                if meta.get("done")
+                else "max_steps_reached"
+            ),
+        }

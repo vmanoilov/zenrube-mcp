@@ -5,7 +5,7 @@ from typing import List, Any, Optional, Dict
 from zenrube.experts.semantic_router import SemanticRouterExpert
 from zenrube.experts.expert_registry import ExpertRegistry
 from zenrube.experts_module import get_expert
-from zenrube.embeddings.client import embed_text
+from zenrube.embeddings.client import embed_texts, embed_text
 from zenrube.embeddings.index import add_items, search
 
 app = FastAPI(title="ZenRube API", version="1.0.0")
@@ -28,13 +28,14 @@ class RunResponse(BaseModel):
     result: str
 
 class EmbedRequest(BaseModel):
-    text: str
+    texts: List[str]
     namespace: Optional[str] = None
-    store: Optional[bool] = True
+    metadata: Dict[str, Any] = {}
+    store: bool = True
 
 class EmbedResponse(BaseModel):
-    vector: List[float]
-    id: Optional[str] = None
+    vectors: List[List[float]]
+    ids: List[str] = []
     namespace: str
 
 class EmbedSearchRequest(BaseModel):
@@ -92,26 +93,27 @@ def list_experts():
 @app.post("/embed", response_model=EmbedResponse)
 def embed_text_endpoint(req: EmbedRequest):
     try:
-        # Generate embedding for single text
-        vector = embed_text(req.text)
+        # Generate embeddings for all texts
+        vectors = embed_texts(req.texts)
 
-        item_id = None
+        item_ids = []
         if req.store:
-            # Create index item
-            items = [{
-                "text": req.text,
-                "vector": vector,
-                "namespace": req.namespace or "default",
-                "metadata": {}
-            }]
+            # Create index items
+            items = []
+            for i, text in enumerate(req.texts):
+                items.append({
+                    "text": text,
+                    "vector": vectors[i],
+                    "namespace": req.namespace or "default",
+                    "metadata": req.metadata
+                })
 
             # Add to index
             item_ids = add_items(items)
-            item_id = item_ids[0] if item_ids else None
 
         return EmbedResponse(
-            vector=vector,
-            id=item_id,
+            vectors=vectors,
+            ids=item_ids,
             namespace=req.namespace or "default"
         )
     except RuntimeError as e:

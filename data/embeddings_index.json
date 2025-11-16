@@ -1,5 +1,39 @@
 {
   "version": 1,
-  "next_id": 1,
-  "items": []
+  "next_id": 4,
+  "items": [
+    {
+      "id": "1",
+      "text": "test text 1",
+      "vector": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "namespace": "test",
+      "metadata": {}
+    },
+    {
+      "id": "2",
+      "text": "test text 2",
+      "vector": [
+        0.4,
+        0.5,
+        0.6
+      ],
+      "namespace": "test",
+      "metadata": {}
+    },
+    {
+      "id": "3",
+      "text": "system architecture",
+      "vector": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "namespace": "systems_architect",
+      "metadata": {}
+    }
+  ]
 }
